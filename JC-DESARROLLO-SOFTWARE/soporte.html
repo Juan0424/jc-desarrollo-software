@@ -1,140 +1,109 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1427">
-
-  <meta
-    name="description"
-    content="Información de soporte de JC Desarrollo de Software y JC INVENTARIO."
-  >
-
+  <meta name="theme-color" content="#101c35">
   <title>Soporte | JC Desarrollo de Software</title>
 
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f3f5f9;
+      color: #202b3c;
+    }
+    header, footer { background: #101c35; color: white; }
+    .container { width: min(950px, 90%); margin: auto; }
+    header { padding: 22px 0; border-bottom: 2px solid #d8b15d; }
+    .brand { font-size: 18px; font-weight: 800; letter-spacing: 1px; }
+    .brand span { color: #d8b15d; }
+    .hero { background: linear-gradient(120deg,#101c35,#243b60); color: white; padding: 75px 0; }
+    .hero small { color: #d8b15d; letter-spacing: 2px; font-weight: bold; }
+    h1 { font-size: clamp(36px,6vw,55px); margin: 15px 0; }
+    .hero p { color: #c4cede; line-height: 1.8; max-width: 620px; }
+    main { padding: 55px 0 80px; }
+    .card {
+      background: white; padding: 30px; margin-bottom: 18px;
+      border: 1px solid #e6eaf0; border-radius: 8px;
+    }
+    h2 { color: #101c35; }
+    p { line-height: 1.8; color: #647087; }
+    .button {
+      display: inline-block; padding: 12px 19px;
+      background: #d8b15d; color: #101c35;
+      border-radius: 5px; font-weight: bold;
+      text-decoration: none; margin-top: 12px;
+    }
+    footer { padding: 22px 0; font-size: 12px; }
+    footer a { color: #f0d99c; }
+  </style>
 </head>
 
-<body class="inner-page">
-
-  <header class="site-header">
-    <div class="container nav-wrap">
-
-      <a class="brand" href="index.html">
-        <span class="brand-mark">JC<span>.</span></span>
-        <span class="brand-name">
-          JC <b>DESARROLLO</b>
-          <small>DE SOFTWARE</small>
-        </span>
-      </a>
-
-      <a class="nav-cta" href="index.html">
-        Volver al inicio ↗
-      </a>
-
-    </div>
+<body>
+  <header>
+    <div class="container brand">JC <span>DESARROLLO</span> DE SOFTWARE</div>
   </header>
 
-  <main>
-
-    <section class="inner-hero">
-      <div class="container">
-        <span class="section-index">ESTAMOS PARA AYUDAR</span>
-
-        <h1>Soporte y consultas</h1>
-
-        <p>
-          Información para consultas relacionadas con los proyectos
-          y aplicaciones presentados por JC Desarrollo de Software.
-        </p>
-      </div>
-    </section>
-
-    <div class="container inner-content">
-
-      <a class="inner-back" href="index.html">
-        ← VOLVER AL SITIO
-      </a>
-
-      <article class="content-card">
-
-        <h2>JC INVENTARIO</h2>
-
-        <p>
-          Para consultas sobre acceso o funcionamiento de JC INVENTARIO,
-          visita la aplicación y utiliza el canal de contacto que el
-          administrador de tu organización te haya facilitado.
-        </p>
-
-        <div class="support-list">
-
-          <div class="support-item">
-            <b>Aplicación web</b>
-
-            <span>
-              Consulta el acceso a JC INVENTARIO desde el sitio
-              oficial de la aplicación.
-            </span>
-
-            <p>
-              <a
-                href="https://jc-inventario.jcinventarioworkersdev.workers.dev/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Abrir JC INVENTARIO ↗
-              </a>
-            </p>
-          </div>
-
-          <div class="support-item">
-            <b>Consultas sobre desarrollo</b>
-
-            <span>
-              Para solicitar información sobre un proyecto o una
-              solución de software, utiliza el formulario de la
-              página principal.
-            </span>
-
-            <p>
-              <a href="index.html#contacto">
-                Ir al formulario de contacto →
-              </a>
-            </p>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="content-card">
-
-        <h2>Al solicitar ayuda</h2>
-
-        <p>
-          Describe el nombre de la aplicación, el módulo donde ocurre
-          la situación y los pasos que realizaste. No incluyas
-          contraseñas, códigos de acceso, documentos de identidad
-          ni datos personales de terceros en una solicitud de soporte.
-        </p>
-
-      </article>
-
+  <section class="hero">
+    <div class="container">
+      <small>ATENCIÓN Y ASISTENCIA</small>
+      <h1>Soporte técnico</h1>
+      <p>
+        Información para usuarios de las aplicaciones y soluciones
+        desarrolladas por JC Desarrollo de Software.
+      </p>
     </div>
+  </section>
 
+  <main class="container">
+    <article class="card">
+      <h2>JC INVENTARIO</h2>
+      <p>
+        Si necesitas ayuda con el acceso o funcionamiento de
+        JC INVENTARIO, puedes abrir la aplicación y consultar
+        con el administrador de tu organización.
+      </p>
+      <a class="button"
+         href="https://jc-inventario.jcinventarioworkersdev.workers.dev/">
+        Abrir JC INVENTARIO ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h2>Consultas sobre proyectos</h2>
+      <p>
+        Para solicitar información sobre desarrollo de aplicaciones,
+        sistemas de gestión o proyectos tecnológicos, visita la
+        página principal.
+      </p>
+      <a class="button" href="index.html#contacto">
+        Contactar con JC →
+      </a>
+    </article>
+
+    <article class="card">
+      <h2>Recomendaciones de seguridad</h2>
+      <p>
+        Nunca compartas contraseñas, códigos de acceso, documentos
+        de identidad o información confidencial en una solicitud
+        de soporte.
+      </p>
+    </article>
   </main>
 
-  <footer class="inner-footer">
+  <footer>
     <div class="container">
-      <span>
-        © <span id="current-year"></span> JC Desarrollo de Software
-      </span>
-
-      <a href="privacidad.html">Privacidad</a>
+      © <span id="year"></span> JC Desarrollo de Software ·
+      <a href="index.html">Volver al sitio principal</a>
     </div>
   </footer>
 
-  <script src="script.js"></script>
-
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
 </body>
 </html>
