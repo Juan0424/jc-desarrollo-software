@@ -1493,7 +1493,7 @@
           ></textarea>
 
           <button type="submit" class="button button-gold">
-            Preparar mensaje ↗
+            Enviar mensaje ↗
           </button>
           
         </form>
@@ -1532,7 +1532,108 @@
 
 <script>
   // CAMBIA ESTE CORREO ANTES DE PUBLICAR.
-  const CORREO_CONTACTO = "juanchacon729@gmail.com";
+  const SUPABASE_FUNCTION_URL =
+  "https://mjxvpecvsoumdmydxtbs.supabase.co/functions/v1/enviar-contacto";
+
+// Pega aquí tu Publishable key.
+// Esta es una clave pública, nunca utilices una Secret key.
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_PJR25d8SXRUOIKFC9bpHtw_c0YT4px5";
+
+// Año del sitio.
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+// Menú de celular.
+const menuButton = document.getElementById("menuButton");
+const navLinks = document.getElementById("navLinks");
+
+menuButton.addEventListener("click", () => {
+  const abierto = navLinks.classList.toggle("open");
+
+  menuButton.setAttribute("aria-expanded", String(abierto));
+  menuButton.textContent = abierto ? "✕" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.textContent = "☰";
+  });
+});
+
+// Formulario conectado a Supabase.
+const contactForm = document.getElementById("contactForm");
+
+contactForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const button = contactForm.querySelector('button[type="submit"]');
+  const help = document.getElementById("contactHelp");
+
+  if (
+    !SUPABASE_PUBLISHABLE_KEY ||
+    SUPABASE_PUBLISHABLE_KEY === "sb_publishable_PJR25d8SXRUOIKFC9bpHtw_c0YT4px5"
+  ) {
+    help.textContent = "Falta configurar la clave pública de Supabase.";
+    return;
+  }
+
+  const datos = new FormData(contactForm);
+
+  const name = String(datos.get("nombre") || "").trim();
+  const email = String(datos.get("correo") || "").trim();
+  const message = String(datos.get("mensaje") || "").trim();
+
+  button.disabled = true;
+  button.textContent = "Enviando mensaje...";
+  help.textContent = "Estamos enviando tu consulta.";
+
+  try {
+    const response = await fetch(SUPABASE_FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_PUBLISHABLE_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+        website: ""
+      })
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.error || "No se pudo enviar el mensaje."
+      );
+    }
+
+    contactForm.reset();
+
+    help.textContent =
+      "¡Mensaje enviado correctamente! Gracias por contactar a JC Desarrollo de Software.";
+
+    help.style.color = "#8fbd98";
+
+  } catch (error) {
+    console.error("Error enviando consulta:", error);
+
+    help.textContent =
+      error.message ||
+      "No se pudo enviar el mensaje. Inténtalo nuevamente.";
+
+    help.style.color = "#e5a2a2";
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "Enviar mensaje ↗";
+  }
+});
 
   // Año del sitio.
   document.getElementById("year").textContent =
