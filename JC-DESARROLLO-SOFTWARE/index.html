@@ -1495,7 +1495,9 @@
           <button type="submit" class="button button-gold">
             Enviar mensaje ↗
           </button>
-          
+          <p class="contact-help" id="contactHelp" role="status" aria-live="polite">
+  Tu mensaje será enviado directamente a JC Desarrollo de Software.
+</p>
         </form>
 
       </div>
@@ -1530,182 +1532,147 @@
   </div>
 </footer>
 
-<script>
-  // CAMBIA ESTE CORREO ANTES DE PUBLICAR.
+
+(() => {
+  // CONEXIÓN CON EL PROYECTO SUPABASE INDEPENDIENTE.
   const SUPABASE_FUNCTION_URL =
-  "https://mjxvpecvsoumdmydxtbs.supabase.co/functions/v1/enviar-contacto";
+    "https://mjxvpecvsoumdmydxtbs.supabase.co/functions/v1/enviar-contacto";
 
-// Pega aquí tu Publishable key.
-// Esta es una clave pública, nunca utilices una Secret key.
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_PJR25d8SXRUOIKFC9bpHtw_c0YT4px5";
+  // Mantén aquí la misma Publishable key que ya tenías.
+  const SUPABASE_PUBLISHABLE_KEY =
+    "PEGA_AQUI_TU_CLAVE_PUBLICABLE_ACTUAL";
 
-// Año del sitio.
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+  // Año automático.
+  const year = document.getElementById("year");
 
-// Menú de celular.
-const menuButton = document.getElementById("menuButton");
-const navLinks = document.getElementById("navLinks");
-
-menuButton.addEventListener("click", () => {
-  const abierto = navLinks.classList.toggle("open");
-
-  menuButton.setAttribute("aria-expanded", String(abierto));
-  menuButton.textContent = abierto ? "✕" : "☰";
-});
-
-navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuButton.setAttribute("aria-expanded", "false");
-    menuButton.textContent = "☰";
-  });
-});
-
-// Formulario conectado a Supabase.
-const contactForm = document.getElementById("contactForm");
-
-contactForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const button = contactForm.querySelector('button[type="submit"]');
-  const help = document.getElementById("contactHelp");
-
-  if (
-    !SUPABASE_PUBLISHABLE_KEY ||
-    SUPABASE_PUBLISHABLE_KEY === "sb_publishable_PJR25d8SXRUOIKFC9bpHtw_c0YT4px5"
-  ) {
-    help.textContent = "Falta configurar la clave pública de Supabase.";
-    return;
+  if (year) {
+    year.textContent = new Date().getFullYear();
   }
 
-  const datos = new FormData(contactForm);
-
-  const name = String(datos.get("nombre") || "").trim();
-  const email = String(datos.get("correo") || "").trim();
-  const message = String(datos.get("mensaje") || "").trim();
-
-  button.disabled = true;
-  button.textContent = "Enviando mensaje...";
-  help.textContent = "Estamos enviando tu consulta.";
-
-  try {
-    const response = await fetch(SUPABASE_FUNCTION_URL, {
-      method: "POST",
-      headers: {
-        "apikey": SUPABASE_PUBLISHABLE_KEY,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        message,
-        website: ""
-      })
-    });
-
-    const result = await response.json().catch(() => ({}));
-
-    if (!response.ok || !result.success) {
-      throw new Error(
-        result.error || "No se pudo enviar el mensaje."
-      );
-    }
-
-    contactForm.reset();
-
-    help.textContent =
-      "¡Mensaje enviado correctamente! Gracias por contactar a JC Desarrollo de Software.";
-
-    help.style.color = "#8fbd98";
-
-  } catch (error) {
-    console.error("Error enviando consulta:", error);
-
-    help.textContent =
-      error.message ||
-      "No se pudo enviar el mensaje. Inténtalo nuevamente.";
-
-    help.style.color = "#e5a2a2";
-
-  } finally {
-    button.disabled = false;
-    button.textContent = "Enviar mensaje ↗";
-  }
-});
-
-  // Año del sitio.
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-  // Menú de celular.
+  // Menú de navegación.
   const menuButton = document.getElementById("menuButton");
   const navLinks = document.getElementById("navLinks");
 
-  menuButton.addEventListener("click", () => {
-    const abierto = navLinks.classList.toggle("open");
+  if (menuButton && navLinks) {
+    menuButton.addEventListener("click", () => {
+      const abierto = navLinks.classList.toggle("open");
 
-    menuButton.setAttribute(
-      "aria-expanded",
-      String(abierto)
-    );
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(abierto)
+      );
 
-    menuButton.textContent = abierto ? "✕" : "☰";
-  });
-
-  navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      menuButton.setAttribute("aria-expanded", "false");
-      menuButton.textContent = "☰";
+      menuButton.textContent = abierto ? "✕" : "☰";
     });
-  });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
+      });
+    });
+  }
 
   // Formulario de contacto.
-  document.getElementById("contactForm").addEventListener(
-    "submit",
-    function(event) {
-      event.preventDefault();
+  const contactForm = document.getElementById("contactForm");
+  const help = document.getElementById("contactHelp");
 
-      const ayuda = document.getElementById("contactHelp");
+  if (!contactForm || !help) {
+    console.error("No se encontró el formulario o su mensaje de estado.");
+    return;
+  }
 
-      if (
-        CORREO_CONTACTO === "REEMPLAZAR_POR_TU_CORREO" ||
-        !CORREO_CONTACTO.includes("@")
-      ) {
-        ayuda.textContent =
-          "Primero debes configurar tu correo de contacto en el código.";
+  const button = contactForm.querySelector('button[type="submit"]');
 
-        return;
+  if (!button) {
+    console.error("No se encontró el botón de envío.");
+    return;
+  }
+
+  contactForm.addEventListener("submit", async (event) => {
+    // Evita que la página se recargue o salte al inicio.
+    event.preventDefault();
+
+    if (button.disabled) return;
+
+    const datos = new FormData(contactForm);
+
+    const name = String(datos.get("nombre") || "").trim();
+    const email = String(datos.get("correo") || "").trim();
+    const message = String(datos.get("mensaje") || "").trim();
+
+    if (
+      !SUPABASE_PUBLISHABLE_KEY ||
+      SUPABASE_PUBLISHABLE_KEY ===
+        "PEGA_AQUI_TU_CLAVE_PUBLICABLE_ACTUAL"
+    ) {
+      help.textContent =
+        "Falta configurar la clave pública de Supabase.";
+
+      return;
+    }
+
+    if (name.length < 2 || !email || message.length < 10) {
+      help.textContent =
+        "Revisa tu nombre, correo y mensaje antes de enviar.";
+
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Enviando mensaje...";
+
+    help.textContent =
+      "Estamos enviando tu consulta. Por favor, espera.";
+
+    help.style.color = "#f0d99c";
+
+    try {
+      const response = await fetch(SUPABASE_FUNCTION_URL, {
+        method: "POST",
+
+        headers: {
+          "apikey": SUPABASE_PUBLISHABLE_KEY,
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          message: message,
+          website: ""
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.error || "No se pudo enviar el mensaje."
+        );
       }
 
-      const datos = new FormData(this);
+      contactForm.reset();
 
-      const nombre = datos.get("nombre").trim();
-      const correo = datos.get("correo").trim();
-      const mensaje = datos.get("mensaje").trim();
+      help.textContent =
+        "¡Mensaje enviado correctamente! Gracias por contactar a JC Desarrollo de Software.";
 
-      const asunto = encodeURIComponent(
-        "Consulta desde JC Desarrollo de Software"
-      );
+      help.style.color = "#8fbd98";
 
-      const cuerpo = encodeURIComponent(
-        "Nombre: " + nombre +
-        "\nCorreo: " + correo +
-        "\n\nMensaje:\n" + mensaje
-      );
+    } catch (error) {
+      console.error("Error enviando consulta:", error);
 
-      window.location.href =
-        "mailto:" + CORREO_CONTACTO +
-        "?subject=" + asunto +
-        "&body=" + cuerpo;
+      help.textContent =
+        error.message ||
+        "No se pudo enviar el mensaje. Inténtalo nuevamente.";
 
-      ayuda.textContent =
-        "Se abrió tu aplicación de correo para preparar el mensaje.";
+      help.style.color = "#e5a2a2";
+
+    } finally {
+      button.disabled = false;
+      button.textContent = "Enviar mensaje ↗";
     }
-  );
-</script>
+  });
 
-</body>
-</html>
+})();
