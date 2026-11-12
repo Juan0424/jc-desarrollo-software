@@ -1602,11 +1602,16 @@
     const email = String(datos.get("correo") || "").trim();
     const message = String(datos.get("mensaje") || "").trim();
 
-    if (
-      !SUPABASE_PUBLISHABLE_KEY ||
-      SUPABASE_PUBLISHABLE_KEY ===
-        "sb_publishable_PJR25d8SXRUOIKFC9bpHtw_c0YT4px5"
-    ) {
+
+  if (
+  !SUPABASE_PUBLISHABLE_KEY ||
+  !SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_PJR25d8SXRUOIKFC9bpHtw_c0YT4px5")
+) {
+  help.textContent =
+    "Falta configurar correctamente la clave pública de Supabase.";
+
+  return;
+}
       help.textContent =
         "Falta configurar la clave pública de Supabase.";
 
