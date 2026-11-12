@@ -1531,7 +1531,7 @@
 
   </div>
 </footer>
-  <script>
+<script>
 (() => {
   "use strict";
 
@@ -1578,49 +1578,25 @@
     return;
   }
 
-  // Crear el mensaje de estado si todavía no existe.
-  let help = document.getElementById("contactHelp");
-
-  if (!help) {
-    help = document.createElement("p");
-    help.id = "contactHelp";
-    help.className = "contact-help";
-    help.setAttribute("role", "status");
-    help.setAttribute("aria-live", "polite");
-    contactForm.appendChild(help);
-  }
-
+  const help = document.getElementById("contactHelp");
   const button = contactForm.querySelector('button[type="submit"]');
 
-  if (!button) {
-    console.error("No se encontró el botón de envío.");
+  if (!help || !button) {
+    console.error("Falta el mensaje de estado o el botón del formulario.");
     return;
   }
 
   contactForm.addEventListener("submit", async (event) => {
-    // Evita la recarga de la página.
     event.preventDefault();
 
     if (button.disabled) return;
 
-    // Verificar la clave pública.
-    if (
-      !SUPABASE_PUBLISHABLE_KEY ||
-      !SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_")
-    ) {
-      help.textContent =
-        "Falta configurar correctamente la clave pública de Supabase.";
-      return;
-    }
-
-    // Obtener los datos.
     const datos = new FormData(contactForm);
 
     const name = String(datos.get("nombre") || "").trim();
     const email = String(datos.get("correo") || "").trim();
     const message = String(datos.get("mensaje") || "").trim();
 
-    // Validar los campos.
     if (name.length < 2 || !email || message.length < 10) {
       help.textContent =
         "Revisa tu nombre, correo y mensaje antes de enviar.";
@@ -1632,7 +1608,6 @@
 
     help.textContent =
       "Estamos enviando tu consulta. Por favor, espera.";
-
     help.style.color = "#f0d99c";
 
     try {
