@@ -1603,20 +1603,20 @@
     const message = String(datos.get("mensaje") || "").trim();
 
 
-  if (
+ if (
   !SUPABASE_PUBLISHABLE_KEY ||
-  !SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_PJR25d8SXRUOIKFC9bpHtw_c0YT4px5")
+  !SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_")
 ) {
   help.textContent =
     "Falta configurar correctamente la clave pública de Supabase.";
-
   return;
 }
-      help.textContent =
-        "Falta configurar la clave pública de Supabase.";
 
-      return;
-    }
+if (name.length < 2 || !email || message.length < 10) {
+  help.textContent =
+    "Revisa tu nombre, correo y mensaje antes de enviar.";
+  return;
+}
 
     if (name.length < 2 || !email || message.length < 10) {
       help.textContent =
