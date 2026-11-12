@@ -1531,14 +1531,13 @@
 
   </div>
 </footer>
-
-
 (() => {
-  // CONEXIÓN CON EL PROYECTO SUPABASE INDEPENDIENTE.
+  "use strict";
+
+  // Conexión con el proyecto Supabase independiente.
   const SUPABASE_FUNCTION_URL =
     "https://mjxvpecvsoumdmydxtbs.supabase.co/functions/v1/enviar-contacto";
 
-  // Mantén aquí la misma Publishable key que ya tenías.
   const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_PJR25d8SXRUOIKFC9bpHtw_c0YT4px5";
 
@@ -1557,11 +1556,7 @@
     menuButton.addEventListener("click", () => {
       const abierto = navLinks.classList.toggle("open");
 
-      menuButton.setAttribute(
-        "aria-expanded",
-        String(abierto)
-      );
-
+      menuButton.setAttribute("aria-expanded", String(abierto));
       menuButton.textContent = abierto ? "✕" : "☰";
     });
 
@@ -1576,11 +1571,22 @@
 
   // Formulario de contacto.
   const contactForm = document.getElementById("contactForm");
-  const help = document.getElementById("contactHelp");
 
-  if (!contactForm || !help) {
-    console.error("No se encontró el formulario o su mensaje de estado.");
+  if (!contactForm) {
+    console.error("No se encontró el formulario de contacto.");
     return;
+  }
+
+  // Crear el mensaje de estado si todavía no existe.
+  let help = document.getElementById("contactHelp");
+
+  if (!help) {
+    help = document.createElement("p");
+    help.id = "contactHelp";
+    help.className = "contact-help";
+    help.setAttribute("role", "status");
+    help.setAttribute("aria-live", "polite");
+    contactForm.appendChild(help);
   }
 
   const button = contactForm.querySelector('button[type="submit"]');
@@ -1591,37 +1597,32 @@
   }
 
   contactForm.addEventListener("submit", async (event) => {
-    // Evita que la página se recargue o salte al inicio.
+    // Evita la recarga de la página.
     event.preventDefault();
 
     if (button.disabled) return;
 
+    // Verificar la clave pública.
+    if (
+      !SUPABASE_PUBLISHABLE_KEY ||
+      !SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_")
+    ) {
+      help.textContent =
+        "Falta configurar correctamente la clave pública de Supabase.";
+      return;
+    }
+
+    // Obtener los datos.
     const datos = new FormData(contactForm);
 
     const name = String(datos.get("nombre") || "").trim();
     const email = String(datos.get("correo") || "").trim();
     const message = String(datos.get("mensaje") || "").trim();
 
-
- if (
-  !SUPABASE_PUBLISHABLE_KEY ||
-  !SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_")
-) {
-  help.textContent =
-    "Falta configurar correctamente la clave pública de Supabase.";
-  return;
-}
-
-if (name.length < 2 || !email || message.length < 10) {
-  help.textContent =
-    "Revisa tu nombre, correo y mensaje antes de enviar.";
-  return;
-}
-
+    // Validar los campos.
     if (name.length < 2 || !email || message.length < 10) {
       help.textContent =
         "Revisa tu nombre, correo y mensaje antes de enviar.";
-
       return;
     }
 
@@ -1636,12 +1637,10 @@ if (name.length < 2 || !email || message.length < 10) {
     try {
       const response = await fetch(SUPABASE_FUNCTION_URL, {
         method: "POST",
-
         headers: {
           "apikey": SUPABASE_PUBLISHABLE_KEY,
           "Content-Type": "application/json"
         },
-
         body: JSON.stringify({
           name: name,
           email: email,
@@ -1681,3 +1680,4 @@ if (name.length < 2 || !email || message.length < 10) {
   });
 
 })();
+
