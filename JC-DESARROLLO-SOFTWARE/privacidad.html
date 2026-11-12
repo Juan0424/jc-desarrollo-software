@@ -1,35 +1,71 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101c35">
-  <meta name="description" content="Política de privacidad de JC Desarrollo de Software.">
+  <meta name="description" content="Conoce cómo JC Desarrollo de Software trata y protege la información enviada mediante su sitio web.">
   <title>Política de privacidad | JC Desarrollo de Software</title>
 
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: #f3f5f9;
       color: #202b3c;
     }
-    header, footer { background: #101c35; color: white; }
-    .container { width: min(950px, 90%); margin: auto; }
-    header { padding: 22px 0; border-bottom: 2px solid #d8b15d; }
-    .brand { font-size: 18px; font-weight: 800; letter-spacing: 1px; }
+
+    header, footer {
+      background: #101c35;
+      color: white;
+    }
+
+    .container {
+      width: min(950px, 90%);
+      margin: auto;
+    }
+
+    header {
+      padding: 22px 0;
+      border-bottom: 2px solid #d8b15d;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
     .brand span { color: #d8b15d; }
+
     .hero {
       background: linear-gradient(120deg,#101c35,#243b60);
       color: white;
       padding: 75px 0;
     }
-    .hero small { color: #d8b15d; letter-spacing: 2px; font-weight: bold; }
-    h1 { font-size: clamp(36px,6vw,55px); margin: 15px 0; }
-    .hero p { color: #c4cede; line-height: 1.8; max-width: 650px; }
+
+    .hero small {
+      color: #d8b15d;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(36px,6vw,55px);
+      margin: 15px 0;
+    }
+
+    .hero p {
+      color: #c4cede;
+      line-height: 1.8;
+      max-width: 650px;
+    }
+
     main { padding: 55px 0 80px; }
+
     .card {
       background: white;
       padding: 30px;
@@ -37,8 +73,18 @@
       border: 1px solid #e6eaf0;
       border-radius: 8px;
     }
-    h2 { color: #101c35; font-size: 19px; }
-    p { line-height: 1.9; color: #647087; font-size: 13px; }
+
+    h2 {
+      color: #101c35;
+      font-size: 19px;
+    }
+
+    p {
+      line-height: 1.9;
+      color: #647087;
+      font-size: 13px;
+    }
+
     .back {
       display: inline-block;
       color: #98712f;
@@ -46,8 +92,19 @@
       font-size: 12px;
       font-weight: bold;
     }
-    footer { padding: 22px 0; font-size: 12px; }
+
+    footer {
+      padding: 22px 0;
+      font-size: 12px;
+    }
+
     footer a { color: #f0d99c; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 55px 0; }
+      .card { padding: 22px; }
+      main { padding: 35px 0 55px; }
+    }
   </style>
 </head>
 
@@ -64,8 +121,9 @@
       <small>TRANSPARENCIA Y PROTECCIÓN DE DATOS</small>
       <h1>Política de privacidad</h1>
       <p>
-        Información sobre el tratamiento de datos durante
-        la visita a JC Desarrollo de Software.
+        Información sobre el tratamiento y la protección
+        de los datos proporcionados al utilizar
+        JC Desarrollo de Software.
       </p>
     </div>
   </section>
@@ -79,98 +137,81 @@
     <article class="card">
       <h2>1. Responsable del sitio</h2>
       <p>
-        Este sitio web presenta los proyectos y servicios
-        de JC Desarrollo de Software. Para consultas sobre
-        privacidad puedes utilizar el medio de contacto
-        publicado en la página principal.
+        JC Desarrollo de Software es un sitio web destinado
+        a presentar proyectos, servicios y soluciones
+        de desarrollo de software.
+      </p>
+      <p>
+        Para consultas relacionadas con privacidad o
+        tratamiento de información, puedes utilizar
+        el formulario de contacto disponible en la página principal.
       </p>
     </article>
 
     <article class="card">
       <h2>2. Información proporcionada por los visitantes</h2>
       <p>
-        El formulario de contacto de esta versión del sitio
-        prepara un mensaje mediante la aplicación de correo
-        del visitante. El usuario decide si desea enviarlo.
-        El sitio no dispone de un sistema propio para guardar
-        esos mensajes en una base de datos.
+        El formulario de contacto solicita información como
+        nombre, dirección de correo electrónico y contenido
+        del mensaje. Estos datos son proporcionados
+        voluntariamente por el visitante.
       </p>
       <p>
-        Si el visitante envía un correo, su contenido será
-        tratado por los proveedores de correo involucrados
-        y por el destinatario del mensaje.
+        Al enviar el formulario, la información se transmite
+        mediante una función de servidor alojada en Supabase
+        y se utiliza para gestionar el envío del mensaje
+        al correo electrónico de contacto de JC Desarrollo
+        de Software.
+      </p>
+      <p>
+        El envío utiliza servicios de terceros, por lo que
+        los datos pueden ser procesados por los proveedores
+        tecnológicos y de correo involucrados en la operación.
+      </p>
+      <p>
+        El sitio no utiliza el formulario para solicitar
+        contraseñas, información bancaria ni datos personales
+        sensibles. No se debe enviar esa información.
       </p>
     </article>
 
     <article class="card">
-      <h2>3. Datos técnicos y alojamiento</h2>
+      <h2>3. Finalidad del tratamiento</h2>
       <p>
-        El sitio puede estar alojado en una plataforma de
-        infraestructura web que procese información técnica
-        necesaria para entregar las páginas, mantener la
-        seguridad y detectar problemas de funcionamiento.
-        El tratamiento de esos datos también está sujeto
-        a las condiciones y políticas del proveedor de alojamiento.
+        La información enviada mediante el formulario se utiliza
+        para recibir, revisar y responder consultas, solicitudes
+        de información, propuestas de proyectos y mensajes
+        relacionados con los servicios ofrecidos.
+      </p>
+      <p>
+        Los datos no deben utilizarse para finalidades distintas
+        a la atención de esas comunicaciones sin contar con
+        la autorización o fundamento correspondiente.
       </p>
     </article>
 
     <article class="card">
-      <h2>4. Cookies y herramientas de seguimiento</h2>
+      <h2>4. Alojamiento y servicios de terceros</h2>
       <p>
-        Esta versión del sitio no incorpora intencionalmente
-        herramientas propias de publicidad, perfiles de
-        seguimiento ni analítica de visitantes. Esta situación
-        deberá revisarse si posteriormente se agregan servicios
-        externos o nuevas funciones.
+        El sitio utiliza servicios tecnológicos externos para
+        su funcionamiento, alojamiento y gestión del formulario
+        de contacto. Entre ellos pueden encontrarse Cloudflare,
+        Supabase y proveedores de correo electrónico.
+      </p>
+      <p>
+        Estos proveedores pueden procesar información técnica
+        o datos enviados por el visitante para prestar sus
+        respectivos servicios, de acuerdo con sus propias
+        condiciones y políticas de privacidad.
       </p>
     </article>
 
     <article class="card">
-      <h2>5. Enlaces externos</h2>
+      <h2>5. Cookies y herramientas de seguimiento</h2>
       <p>
-        El sitio contiene enlaces a servicios de terceros,
-        como GitHub y JC INVENTARIO. Al visitar esos servicios,
-        el usuario queda sujeto a sus respectivas políticas
-        y condiciones de privacidad.
-      </p>
-    </article>
-
-    <article class="card">
-      <h2>6. Seguridad</h2>
-      <p>
-        No envíes contraseñas, códigos de acceso, documentos
-        de identidad, datos bancarios ni información confidencial
-        mediante el formulario de contacto de este sitio.
-      </p>
-    </article>
-
-    <article class="card">
-      <h2>7. Cambios a esta política</h2>
-      <p>
-        Esta política podrá actualizarse cuando cambien las
-        funciones del sitio, los servicios utilizados o las
-        prácticas de tratamiento de información. La versión
-        vigente estará disponible en esta misma dirección.
+        El sitio no incorpora intencionalmente herramientas
+        propias de publicidad, perfiles de seguimiento
+        ni analítica de visitantes.
       </p>
       <p>
-        <strong>Última actualización: noviembre de 2026.</strong>
-      </p>
-    </article>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      © <span id="year"></span> JC Desarrollo de Software ·
-      <a href="soporte.html">Soporte</a> ·
-      <a href="index.html">Inicio</a>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
-
-</body>
-</html>
+        Los proveedores de alojamiento o servicios
